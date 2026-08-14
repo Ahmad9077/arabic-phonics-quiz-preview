@@ -145,10 +145,10 @@ access/difficulty, preferred keys, one report path, and one submission per chall
 - [x] T042 Run lint, typecheck, unit/property, audio, preview-build, and full Playwright gates and fix every failure
 - [x] T043 Capture and visually review desktop/mobile start, quiz, feedback, and results screenshots in `artifacts/screenshots/`
 - [x] T044 Obtain an independent Test Automation Engineer review and resolve all reproducible blocking findings
-- [ ] T045 Initialize the preview repository, commit the reviewed tree, and push only the standalone preview code
-- [ ] T046 Enable GitHub Pages Actions, wait for deployment success, and verify the public preview URL, audio assets, and no-write network boundary
-- [ ] T047 Re-check the live Hub remote head, local Hub worktree, existing quiz worktrees, and production URLs to prove no pre-approval production mutation
-- [ ] T048 Mark every task complete and run the quickstart validation exactly as documented in `specs/001-arabic-phonics-quiz/quickstart.md`
+- [x] T045 Initialize the preview repository, commit the reviewed tree, and push only the standalone preview code
+- [x] T046 Enable GitHub Pages Actions, wait for deployment success, and verify the public preview URL, audio assets, and no-write network boundary
+- [x] T047 Re-check the live Hub remote head, local Hub worktree, existing quiz worktrees, and production URLs to prove no pre-approval production mutation
+- [x] T048 Mark every task complete and run the quickstart validation exactly as documented in `specs/001-arabic-phonics-quiz/quickstart.md`
 
 ---
 
