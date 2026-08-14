@@ -1,0 +1,19 @@
+{
+  "id": "arabic-phonics",
+  "quizId": "arabic-phonics",
+  "title": "صدى الحروف",
+  "description": "تدريب صوتي لاختيار الحرف العربي الصحيح في صورته المنفصلة والمتصلة.",
+  "recommendedAge": "4–8",
+  "basePath": "/arabic-phonics-quiz/",
+  "questionsPerRound": 15,
+  "tiers": ["easy", "medium", "hard"],
+  "forms": ["isolated", "initial", "final"],
+  "capabilities": {
+    "audio": true,
+    "adaptive": true,
+    "progress": true,
+    "answerReview": true,
+    "challenge": true
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/arabic-phonics-quiz-manifest.schema.json",
+  "title": "Arabic Phonics Quiz Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "quizId",
+    "title",
+    "description",
+    "basePath",
+    "questionsPerRound",
+    "tiers",
+    "forms",
+    "capabilities",
+    "version"
+  ],
+  "properties": {
+    "id": { "const": "arabic-phonics" },
+    "quizId": { "const": "arabic-phonics" },
+    "title": { "type": "string", "minLength": 1 },
+    "description": { "type": "string", "minLength": 1 },
+    "recommendedAge": { "type": "string" },
+    "basePath": { "type": "string", "pattern": "^/.+/$" },
+    "questionsPerRound": { "const": 15 },
+    "tiers": {
+      "const": ["easy", "medium", "hard"]
+    },
+    "forms": {
+      "const": ["isolated", "initial", "final"]
+    },
+    "capabilities": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["audio", "adaptive", "progress", "answerReview", "challenge"],
+      "properties": {
+        "audio": { "const": true },
+        "adaptive": { "const": true },
+        "progress": { "const": true },
+        "answerReview": { "const": true },
+        "challenge": { "const": true }
+      }
+    },
+    "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" }
+  }
+}

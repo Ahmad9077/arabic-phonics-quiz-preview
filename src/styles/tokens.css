@@ -1,0 +1,31 @@
+:root {
+  color-scheme: light;
+  font-family: 'Noto Sans Arabic Variable', 'SF Arabic', 'Geeza Pro', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --font-display: 'Noto Kufi Arabic Variable', 'Noto Sans Arabic Variable', sans-serif;
+  --font-body: 'Noto Sans Arabic Variable', 'SF Arabic', 'Geeza Pro', sans-serif;
+
+  --ink-plum: #271c50;
+  --ink-plum-soft: #463775;
+  --paper-lavender: #f7f3ff;
+  --paper-white: #fffefe;
+  --saffron: #ffc857;
+  --saffron-deep: #d99500;
+  --echo-teal: #2fc9b7;
+  --echo-teal-deep: #087f73;
+  --coral: #f57572;
+  --coral-deep: #a43434;
+  --iris: #8b7cf6;
+  --iris-soft: #ded8ff;
+  --line: #ddd4f4;
+  --muted: #746a8f;
+
+  --shadow-soft: 0 18px 55px rgb(39 28 80 / 12%);
+  --shadow-button: 0 8px 0 rgb(39 28 80 / 14%);
+  --radius-card: 28px;
+  --radius-control: 18px;
+  --content-width: 760px;
+  --safe-bottom: max(18px, env(safe-area-inset-bottom));
+}

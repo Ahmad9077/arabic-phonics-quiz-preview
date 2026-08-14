@@ -1,0 +1,230 @@
+{
+  "generatedAt": "2026-08-14T01:49:44.231Z",
+  "generator": "macOS Majed + FFmpeg loudnorm",
+  "entries": [
+    {
+      "letterId": "alif",
+      "cue": "أَ",
+      "file": "audio/alif.mp3",
+      "durationMs": 312,
+      "bytes": 2969,
+      "sha256": "d61c10a3c26e452598978b9a2abbc11858fbdf82671f27ecd6433a107532a72b"
+    },
+    {
+      "letterId": "beh",
+      "cue": "بَ",
+      "file": "audio/beh.mp3",
+      "durationMs": 401,
+      "bytes": 3805,
+      "sha256": "4e75505485a7323e605d085adcb9b279e9e7a12e95110e3e26c331dc097df2a7"
+    },
+    {
+      "letterId": "teh",
+      "cue": "تَ",
+      "file": "audio/teh.mp3",
+      "durationMs": 311,
+      "bytes": 2969,
+      "sha256": "f10af8c5557f29225a8c010209681a159e3e604b7dd3e2ebad4441fb7c732291"
+    },
+    {
+      "letterId": "theh",
+      "cue": "ثَ",
+      "file": "audio/theh.mp3",
+      "durationMs": 201,
+      "bytes": 2133,
+      "sha256": "a9ee8f2ef077c699945d9e2e92b1d6dde24513a6b44b441e781a588ff3e7d3ed"
+    },
+    {
+      "letterId": "jeem",
+      "cue": "جَ",
+      "file": "audio/jeem.mp3",
+      "durationMs": 453,
+      "bytes": 4223,
+      "sha256": "c3d40e623eb961335f4ffaf68d5d9bb6e5c7709a1fa87a8f7784f5519ea20478"
+    },
+    {
+      "letterId": "hah",
+      "cue": "حَ",
+      "file": "audio/hah.mp3",
+      "durationMs": 415,
+      "bytes": 3805,
+      "sha256": "bf9adeadac1207dd450779b4653eaa0be194691a9e78c2137a19102f957e3821"
+    },
+    {
+      "letterId": "khah",
+      "cue": "خَ",
+      "file": "audio/khah.mp3",
+      "durationMs": 206,
+      "bytes": 2133,
+      "sha256": "e4e7b57d87ca7b74ff5e767b189b3091d774f890495bde102c2430b59ca55632"
+    },
+    {
+      "letterId": "dal",
+      "cue": "دَ",
+      "file": "audio/dal.mp3",
+      "durationMs": 424,
+      "bytes": 4014,
+      "sha256": "944437861e8aca0a9acbc30ffca0becd5d398f5f45d3f6176f56f152a7914d35"
+    },
+    {
+      "letterId": "thal",
+      "cue": "ذَ",
+      "file": "audio/thal.mp3",
+      "durationMs": 441,
+      "bytes": 4014,
+      "sha256": "a75948e2a379533c2210b806b53cd379c534845a46e80427250cb92545c0c85c"
+    },
+    {
+      "letterId": "reh",
+      "cue": "رَ",
+      "file": "audio/reh.mp3",
+      "durationMs": 383,
+      "bytes": 3596,
+      "sha256": "b48931c75a49e3b16a7273c18d6aa8dfca33a6e1299fed80fcb483a3f426149e"
+    },
+    {
+      "letterId": "zain",
+      "cue": "زَ",
+      "file": "audio/zain.mp3",
+      "durationMs": 453,
+      "bytes": 4223,
+      "sha256": "ee226f4ae39d59e7421feea7b0e1ce84d6cbdb3d69b0ac90be8046e06716177f"
+    },
+    {
+      "letterId": "seen",
+      "cue": "سَ",
+      "file": "audio/seen.mp3",
+      "durationMs": 200,
+      "bytes": 2133,
+      "sha256": "3f7933f63e15020e5229b3183e9d029db080cb56ecb6f52288e1345b81406deb"
+    },
+    {
+      "letterId": "sheen",
+      "cue": "شَ",
+      "file": "audio/sheen.mp3",
+      "durationMs": 1026,
+      "bytes": 8821,
+      "sha256": "77d9be53445eddd3e9043735b1a7860281052f23c9838412d583028f2f8885c2"
+    },
+    {
+      "letterId": "sad",
+      "cue": "صَ",
+      "file": "audio/sad.mp3",
+      "durationMs": 201,
+      "bytes": 2133,
+      "sha256": "583decf78062c3ded8706644344520cf7276272912a1943b250fb96e1f2b3ea2"
+    },
+    {
+      "letterId": "dad",
+      "cue": "ضَ",
+      "file": "audio/dad.mp3",
+      "durationMs": 389,
+      "bytes": 3596,
+      "sha256": "bf1c5df3341dac4e8211cb46e30bdfd94bc0390c0c1af1a5ea51a76a0ffe7520"
+    },
+    {
+      "letterId": "tah",
+      "cue": "طَ",
+      "file": "audio/tah.mp3",
+      "durationMs": 284,
+      "bytes": 2760,
+      "sha256": "4822a197731b23a8f863ec867803c47bf67c1f77552e0e89e602028f435bade5"
+    },
+    {
+      "letterId": "zah",
+      "cue": "ظَ",
+      "file": "audio/zah.mp3",
+      "durationMs": 430,
+      "bytes": 4014,
+      "sha256": "bbf44ca9bd4d0971ad00d8752e3a1766688d38088111a266a55432a09866042f"
+    },
+    {
+      "letterId": "ain",
+      "cue": "عَ",
+      "file": "audio/ain.mp3",
+      "durationMs": 371,
+      "bytes": 3596,
+      "sha256": "97cef5a0d364ac4a8e8e777627f6624eea9fd1623850fb8d5b1ef42fd14edb6d"
+    },
+    {
+      "letterId": "ghain",
+      "cue": "غَ",
+      "file": "audio/ghain.mp3",
+      "durationMs": 442,
+      "bytes": 4014,
+      "sha256": "dd6c7cf1967e04b46fa32164c7f63cf545d4d5a45954ed9a7a7ede44f1ae3652"
+    },
+    {
+      "letterId": "feh",
+      "cue": "فَ",
+      "file": "audio/feh.mp3",
+      "durationMs": 200,
+      "bytes": 2133,
+      "sha256": "bba5b65c912d6d1c0c8ee421db88cfa252dc7e1dfe151d6bbb5419a1da2e3708"
+    },
+    {
+      "letterId": "qaf",
+      "cue": "قَ",
+      "file": "audio/qaf.mp3",
+      "durationMs": 304,
+      "bytes": 2969,
+      "sha256": "f42672d7d44cb875245c0ba27c81ecece6eca7bd276e89659d1776375910812e"
+    },
+    {
+      "letterId": "kaf",
+      "cue": "كَ",
+      "file": "audio/kaf.mp3",
+      "durationMs": 200,
+      "bytes": 2133,
+      "sha256": "75af4b6b02582f37bfdaa70af587d6734f86c91bd24df2f2983772a6ba993c0a"
+    },
+    {
+      "letterId": "lam",
+      "cue": "لَ",
+      "file": "audio/lam.mp3",
+      "durationMs": 424,
+      "bytes": 4014,
+      "sha256": "fd39456fbb64579d65b49f29fe9611bed8ccfc87236822d63bd4d88421111cc8"
+    },
+    {
+      "letterId": "meem",
+      "cue": "مَ",
+      "file": "audio/meem.mp3",
+      "durationMs": 423,
+      "bytes": 4014,
+      "sha256": "de72ee8bc432cfb7e6be217b20daa3c777f57bfdcfbb49758de398bc65278c9a"
+    },
+    {
+      "letterId": "noon",
+      "cue": "نَ",
+      "file": "audio/noon.mp3",
+      "durationMs": 439,
+      "bytes": 4014,
+      "sha256": "c4674e9b9933ba86a31a8a0d0eaf7c000a071776c4eb06feeba4ac4bcd100e31"
+    },
+    {
+      "letterId": "heh",
+      "cue": "هَ",
+      "file": "audio/heh.mp3",
+      "durationMs": 344,
+      "bytes": 3387,
+      "sha256": "1c696e5f41f637fbedf76cad591b158e07d73c8bae1ef8614fc240395ee689c2"
+    },
+    {
+      "letterId": "waw",
+      "cue": "وَ",
+      "file": "audio/waw.mp3",
+      "durationMs": 412,
+      "bytes": 3805,
+      "sha256": "f2d455911827e8de3a6ac04f2d94647357241175acffab0e5480e21591be16f6"
+    },
+    {
+      "letterId": "yeh",
+      "cue": "يَ",
+      "file": "audio/yeh.mp3",
+      "durationMs": 406,
+      "bytes": 3805,
+      "sha256": "199f83045eef0052c6804378416ae01b4683344907978000495a22aa5347fdce"
+    }
+  ]
+}
