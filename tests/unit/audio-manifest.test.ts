@@ -17,6 +17,7 @@ describe('bundled Arabic audio manifest', () => {
     const manifest = loadManifest()
     const ids = manifest.entries.map((entry) => entry.letterId)
 
+    expect(manifest.generator).toContain('ElevenLabs Layla')
     expect(manifest.entries).toHaveLength(28)
     expect(new Set(ids).size).toBe(28)
 

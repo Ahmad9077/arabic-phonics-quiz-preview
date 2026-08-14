@@ -3,7 +3,8 @@ import { expect, test } from '@playwright/test'
 test('starts with audio, replays it, and locks only the first answer', async ({ page }) => {
   const audioRequests: string[] = []
   page.on('request', (request) => {
-    if (request.url().includes('/audio/') && request.url().endsWith('.mp3')) {
+    const requestUrl = new URL(request.url())
+    if (requestUrl.pathname.includes('/audio/') && requestUrl.pathname.endsWith('.mp3')) {
       audioRequests.push(request.url())
     }
   })
@@ -15,6 +16,7 @@ test('starts with audio, replays it, and locks only the first answer', async ({ 
   const answers = page.getByTestId('answer-option')
   await expect(answers).toHaveCount(4)
   await expect.poll(() => audioRequests.length).toBeGreaterThan(0)
+  expect(new URL(audioRequests[0]).searchParams.get('v')).toBe('layla-hq-2026-08-14')
 
   const beforeReplay = audioRequests.length
   await page.getByRole('button', { name: 'اسمعي الصوت مرة أخرى' }).click()

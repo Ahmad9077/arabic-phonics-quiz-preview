@@ -1,230 +1,230 @@
 {
-  "generatedAt": "2026-08-14T01:49:44.231Z",
-  "generator": "macOS Majed + FFmpeg loudnorm",
+  "generatedAt": "2026-08-14T10:47:50.175Z",
+  "generator": "ElevenLabs Layla (Multilingual v2, Arabic) + FFmpeg middle-take loudnorm",
   "entries": [
     {
       "letterId": "alif",
       "cue": "أَ",
       "file": "audio/alif.mp3",
-      "durationMs": 312,
-      "bytes": 2969,
-      "sha256": "d61c10a3c26e452598978b9a2abbc11858fbdf82671f27ecd6433a107532a72b"
+      "durationMs": 430,
+      "bytes": 7985,
+      "sha256": "f8fe044db04a2097406c874a76c5483b71aa958347153eb06036711260ff33f3"
     },
     {
       "letterId": "beh",
       "cue": "بَ",
       "file": "audio/beh.mp3",
-      "durationMs": 401,
-      "bytes": 3805,
-      "sha256": "4e75505485a7323e605d085adcb9b279e9e7a12e95110e3e26c331dc097df2a7"
+      "durationMs": 450,
+      "bytes": 8403,
+      "sha256": "4c3a7fd029de9532626f0330895e3961fe2bc94d4a52c7bf23e1a347379ff0d2"
     },
     {
       "letterId": "teh",
       "cue": "تَ",
       "file": "audio/teh.mp3",
-      "durationMs": 311,
-      "bytes": 2969,
-      "sha256": "f10af8c5557f29225a8c010209681a159e3e604b7dd3e2ebad4441fb7c732291"
+      "durationMs": 390,
+      "bytes": 7149,
+      "sha256": "1368e436696c01411a4df0c7c1fea91d61ab86950ceb2ecf02d9708aea5d183b"
     },
     {
       "letterId": "theh",
       "cue": "ثَ",
       "file": "audio/theh.mp3",
-      "durationMs": 201,
-      "bytes": 2133,
-      "sha256": "a9ee8f2ef077c699945d9e2e92b1d6dde24513a6b44b441e781a588ff3e7d3ed"
+      "durationMs": 490,
+      "bytes": 8821,
+      "sha256": "8dc417b2b668cfe3062680d7c488f9db7e88a813e70c32c2381cc484796002e1"
     },
     {
       "letterId": "jeem",
       "cue": "جَ",
       "file": "audio/jeem.mp3",
-      "durationMs": 453,
-      "bytes": 4223,
-      "sha256": "c3d40e623eb961335f4ffaf68d5d9bb6e5c7709a1fa87a8f7784f5519ea20478"
+      "durationMs": 440,
+      "bytes": 7985,
+      "sha256": "58094e44e6ac6dffde3130c7db2089b0599da2e94cc0d7e0cf5778d3d2457f42"
     },
     {
       "letterId": "hah",
       "cue": "حَ",
       "file": "audio/hah.mp3",
-      "durationMs": 415,
-      "bytes": 3805,
-      "sha256": "bf9adeadac1207dd450779b4653eaa0be194691a9e78c2137a19102f957e3821"
+      "durationMs": 470,
+      "bytes": 8403,
+      "sha256": "ccda98f8814e14e922ea6523c4eca25f5099aeee48e620756e05e743ce792bc8"
     },
     {
       "letterId": "khah",
       "cue": "خَ",
       "file": "audio/khah.mp3",
-      "durationMs": 206,
-      "bytes": 2133,
-      "sha256": "e4e7b57d87ca7b74ff5e767b189b3091d774f890495bde102c2430b59ca55632"
+      "durationMs": 520,
+      "bytes": 9239,
+      "sha256": "d1725e5c90506d895746cb3f72cee46f8fc3c18a67b94a93ad277c029c988171"
     },
     {
       "letterId": "dal",
       "cue": "دَ",
       "file": "audio/dal.mp3",
-      "durationMs": 424,
-      "bytes": 4014,
-      "sha256": "944437861e8aca0a9acbc30ffca0becd5d398f5f45d3f6176f56f152a7914d35"
+      "durationMs": 510,
+      "bytes": 9239,
+      "sha256": "35d7da5b06e915aeeeaf6965ed6c2416c5b2cefcdb2766c3c6340fb32d2ab3ac"
     },
     {
       "letterId": "thal",
       "cue": "ذَ",
       "file": "audio/thal.mp3",
-      "durationMs": 441,
-      "bytes": 4014,
-      "sha256": "a75948e2a379533c2210b806b53cd379c534845a46e80427250cb92545c0c85c"
+      "durationMs": 500,
+      "bytes": 9239,
+      "sha256": "973ec4e3205dabf05ba76d4170dea52a0907b2b69636f66f590c5a2cd9bf82cc"
     },
     {
       "letterId": "reh",
       "cue": "رَ",
       "file": "audio/reh.mp3",
-      "durationMs": 383,
-      "bytes": 3596,
-      "sha256": "b48931c75a49e3b16a7273c18d6aa8dfca33a6e1299fed80fcb483a3f426149e"
+      "durationMs": 430,
+      "bytes": 7985,
+      "sha256": "6f7f10322cc73c511b8a2f3b6b0a265e56902bc6b445d02649c2ea14e17465cf"
     },
     {
       "letterId": "zain",
       "cue": "زَ",
       "file": "audio/zain.mp3",
-      "durationMs": 453,
-      "bytes": 4223,
-      "sha256": "ee226f4ae39d59e7421feea7b0e1ce84d6cbdb3d69b0ac90be8046e06716177f"
+      "durationMs": 430,
+      "bytes": 7985,
+      "sha256": "a9043af8eba2c9e11f1bde21eee85eaf03dae3bb9b197baf772dc8abdc71ae39"
     },
     {
       "letterId": "seen",
       "cue": "سَ",
       "file": "audio/seen.mp3",
-      "durationMs": 200,
-      "bytes": 2133,
-      "sha256": "3f7933f63e15020e5229b3183e9d029db080cb56ecb6f52288e1345b81406deb"
+      "durationMs": 500,
+      "bytes": 9239,
+      "sha256": "ede01ac1390a922dc7b861356751961b71a92456f569ea998275f6b509206ed9"
     },
     {
       "letterId": "sheen",
       "cue": "شَ",
       "file": "audio/sheen.mp3",
-      "durationMs": 1026,
-      "bytes": 8821,
-      "sha256": "77d9be53445eddd3e9043735b1a7860281052f23c9838412d583028f2f8885c2"
+      "durationMs": 500,
+      "bytes": 9239,
+      "sha256": "a48213ee0801c6f3227e1a5e1f4c0da3111445525b288fad037c4d5363500259"
     },
     {
       "letterId": "sad",
       "cue": "صَ",
       "file": "audio/sad.mp3",
-      "durationMs": 201,
-      "bytes": 2133,
-      "sha256": "583decf78062c3ded8706644344520cf7276272912a1943b250fb96e1f2b3ea2"
+      "durationMs": 450,
+      "bytes": 8403,
+      "sha256": "a7cc122654866497c3074555fdc253ca3efe9969fce44dd5eae0a371bff0f633"
     },
     {
       "letterId": "dad",
       "cue": "ضَ",
       "file": "audio/dad.mp3",
-      "durationMs": 389,
-      "bytes": 3596,
-      "sha256": "bf1c5df3341dac4e8211cb46e30bdfd94bc0390c0c1af1a5ea51a76a0ffe7520"
+      "durationMs": 420,
+      "bytes": 7985,
+      "sha256": "4ddcf52c97335c4dd4b904e4fcff72b45796e50397c487149e08092c5383f3fb"
     },
     {
       "letterId": "tah",
       "cue": "طَ",
       "file": "audio/tah.mp3",
-      "durationMs": 284,
-      "bytes": 2760,
-      "sha256": "4822a197731b23a8f863ec867803c47bf67c1f77552e0e89e602028f435bade5"
+      "durationMs": 390,
+      "bytes": 7149,
+      "sha256": "2bc864c6ece016431960ceeded34d7a1c30720da611b4704384e890898bf08f7"
     },
     {
       "letterId": "zah",
       "cue": "ظَ",
       "file": "audio/zah.mp3",
-      "durationMs": 430,
-      "bytes": 4014,
-      "sha256": "bbf44ca9bd4d0971ad00d8752e3a1766688d38088111a266a55432a09866042f"
+      "durationMs": 460,
+      "bytes": 8403,
+      "sha256": "3b2b06483d73415aa8afea77f1a91198f09878589f4ca4be9f946b87d85288c2"
     },
     {
       "letterId": "ain",
       "cue": "عَ",
       "file": "audio/ain.mp3",
-      "durationMs": 371,
-      "bytes": 3596,
-      "sha256": "97cef5a0d364ac4a8e8e777627f6624eea9fd1623850fb8d5b1ef42fd14edb6d"
+      "durationMs": 510,
+      "bytes": 9239,
+      "sha256": "354660838e1e106e52ca6f9e4da1bd071bb1aac189c7a8123d0a09f423d2f278"
     },
     {
       "letterId": "ghain",
       "cue": "غَ",
       "file": "audio/ghain.mp3",
-      "durationMs": 442,
-      "bytes": 4014,
-      "sha256": "dd6c7cf1967e04b46fa32164c7f63cf545d4d5a45954ed9a7a7ede44f1ae3652"
+      "durationMs": 500,
+      "bytes": 9239,
+      "sha256": "3c8f01bfc739d4e50b0b0eb816f18b7b79dc053141b9f821da573ebac2549e35"
     },
     {
       "letterId": "feh",
       "cue": "فَ",
       "file": "audio/feh.mp3",
-      "durationMs": 200,
-      "bytes": 2133,
-      "sha256": "bba5b65c912d6d1c0c8ee421db88cfa252dc7e1dfe151d6bbb5419a1da2e3708"
+      "durationMs": 360,
+      "bytes": 6731,
+      "sha256": "178b22bc1080d195691c304fcd0fa5bce6df87725fa945f1632741170b2a0d29"
     },
     {
       "letterId": "qaf",
       "cue": "قَ",
       "file": "audio/qaf.mp3",
-      "durationMs": 304,
-      "bytes": 2969,
-      "sha256": "f42672d7d44cb875245c0ba27c81ecece6eca7bd276e89659d1776375910812e"
+      "durationMs": 341,
+      "bytes": 6731,
+      "sha256": "6752e0c38b558d16466ed2712b8b51d397fad377736817f5179a5ddf99cd3e6d"
     },
     {
       "letterId": "kaf",
       "cue": "كَ",
       "file": "audio/kaf.mp3",
-      "durationMs": 200,
-      "bytes": 2133,
-      "sha256": "75af4b6b02582f37bfdaa70af587d6734f86c91bd24df2f2983772a6ba993c0a"
+      "durationMs": 380,
+      "bytes": 7149,
+      "sha256": "6a73333d203190b0ed4805fe06b11975f8b0e1a30d21bf972a2ec45effe991b6"
     },
     {
       "letterId": "lam",
       "cue": "لَ",
       "file": "audio/lam.mp3",
-      "durationMs": 424,
-      "bytes": 4014,
-      "sha256": "fd39456fbb64579d65b49f29fe9611bed8ccfc87236822d63bd4d88421111cc8"
+      "durationMs": 460,
+      "bytes": 8403,
+      "sha256": "d7e89eca58cb38b5ffd8dc63f855291f7c8a5b60005121e2b99850cdd2058846"
     },
     {
       "letterId": "meem",
       "cue": "مَ",
       "file": "audio/meem.mp3",
-      "durationMs": 423,
-      "bytes": 4014,
-      "sha256": "de72ee8bc432cfb7e6be217b20daa3c777f57bfdcfbb49758de398bc65278c9a"
+      "durationMs": 350,
+      "bytes": 6731,
+      "sha256": "1e8588dd25c635f7ae44a838a93d7a44f871b698501ac2d41e96f56ddc6ac127"
     },
     {
       "letterId": "noon",
       "cue": "نَ",
       "file": "audio/noon.mp3",
-      "durationMs": 439,
-      "bytes": 4014,
-      "sha256": "c4674e9b9933ba86a31a8a0d0eaf7c000a071776c4eb06feeba4ac4bcd100e31"
+      "durationMs": 360,
+      "bytes": 6731,
+      "sha256": "086d25c3b7456190a5fa4f3b141c2c76a775240a7a85669043950d8c653dae26"
     },
     {
       "letterId": "heh",
       "cue": "هَ",
       "file": "audio/heh.mp3",
-      "durationMs": 344,
-      "bytes": 3387,
-      "sha256": "1c696e5f41f637fbedf76cad591b158e07d73c8bae1ef8614fc240395ee689c2"
+      "durationMs": 400,
+      "bytes": 7567,
+      "sha256": "6402d9fff807a80e7637d5db56cf00f1b46c3d85b0f90eb09c57bb528a5dfc18"
     },
     {
       "letterId": "waw",
       "cue": "وَ",
       "file": "audio/waw.mp3",
-      "durationMs": 412,
-      "bytes": 3805,
-      "sha256": "f2d455911827e8de3a6ac04f2d94647357241175acffab0e5480e21591be16f6"
+      "durationMs": 360,
+      "bytes": 6731,
+      "sha256": "155098418f307542b1e52a7bb67ad698d01880902508c8d712fb9347cf7b36aa"
     },
     {
       "letterId": "yeh",
       "cue": "يَ",
       "file": "audio/yeh.mp3",
-      "durationMs": 406,
-      "bytes": 3805,
-      "sha256": "199f83045eef0052c6804378416ae01b4683344907978000495a22aa5347fdce"
+      "durationMs": 470,
+      "bytes": 8403,
+      "sha256": "0d859621070a8acd1b568f09b7ae2cea2801a950799443e11ed2bc0cca948ddb"
     }
   ]
 }

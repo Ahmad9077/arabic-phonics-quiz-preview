@@ -32,18 +32,37 @@ function durationMs(filePath) {
   return Math.round(Number.parseFloat(value.trim()) * 1_000)
 }
 
-function signalOnsetMs(filePath) {
+function audioProperties(filePath) {
+  const output = run(
+    'ffprobe',
+    [
+      '-v', 'error',
+      '-show_entries', 'format=bit_rate:stream=codec_name,sample_rate,channels',
+      '-of', 'json',
+      filePath,
+    ],
+    { encoding: 'utf8' },
+  )
+
+  return JSON.parse(output)
+}
+
+function signalMetrics(filePath) {
   const pcm = run('ffmpeg', ['-v', 'error', '-i', filePath, '-ac', '1', '-ar', '44100', '-f', 'f32le', 'pipe:1'])
   const buffer = Buffer.isBuffer(pcm) ? pcm : Buffer.from(pcm)
   const sampleCount = Math.floor(buffer.length / 4)
+  let onsetMs = Number.POSITIVE_INFINITY
+  let peakAmplitude = 0
 
   for (let index = 0; index < sampleCount; index += 1) {
-    if (Math.abs(buffer.readFloatLE(index * 4)) >= 0.003) {
-      return Math.round((index / 44_100) * 1_000)
+    const amplitude = Math.abs(buffer.readFloatLE(index * 4))
+    peakAmplitude = Math.max(peakAmplitude, amplitude)
+    if (!Number.isFinite(onsetMs) && amplitude >= 0.003) {
+      onsetMs = Math.round((index / 44_100) * 1_000)
     }
   }
 
-  return Number.POSITIVE_INFINITY
+  return { onsetMs, peakAmplitude }
 }
 
 const entries = letters.map((letter) => {
@@ -57,7 +76,10 @@ const entries = letters.map((letter) => {
   const bytes = readFileSync(filePath)
   const size = statSync(filePath).size
   const duration = durationMs(filePath)
-  const onset = signalOnsetMs(filePath)
+  const properties = audioProperties(filePath)
+  const stream = properties.streams?.[0]
+  const bitRate = Number.parseInt(properties.format?.bit_rate ?? '0', 10)
+  const { onsetMs, peakAmplitude } = signalMetrics(filePath)
 
   if (size <= 0 || size > 80 * 1024) {
     throw new Error(`${file} has invalid size ${size}.`)
@@ -67,8 +89,20 @@ const entries = letters.map((letter) => {
     throw new Error(`${file} has invalid duration ${duration}ms.`)
   }
 
-  if (onset > 150) {
-    throw new Error(`${file} begins useful signal at ${onset}ms.`)
+  if (stream?.codec_name !== 'mp3' || stream?.sample_rate !== '44100' || stream?.channels !== 1) {
+    throw new Error(`${file} must be mono MP3 at 44.1kHz.`)
+  }
+
+  if (bitRate < 96_000) {
+    throw new Error(`${file} has insufficient bitrate ${bitRate}.`)
+  }
+
+  if (onsetMs > 150) {
+    throw new Error(`${file} begins useful signal at ${onsetMs}ms.`)
+  }
+
+  if (peakAmplitude < 0.1) {
+    throw new Error(`${file} is silent or too quiet (peak ${peakAmplitude}).`)
   }
 
   return {
@@ -83,7 +117,7 @@ const entries = letters.map((letter) => {
 
 const manifest = {
   generatedAt: new Date().toISOString(),
-  generator: 'macOS Majed + FFmpeg loudnorm',
+  generator: 'ElevenLabs Layla (Multilingual v2, Arabic) + FFmpeg middle-take loudnorm',
   entries,
 }
 
