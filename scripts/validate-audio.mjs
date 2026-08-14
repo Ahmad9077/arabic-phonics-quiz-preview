@@ -91,8 +91,25 @@ if (shouldWrite) {
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
 } else {
   const existing = JSON.parse(readFileSync(manifestPath, 'utf8'))
-  if (JSON.stringify(existing.entries) !== JSON.stringify(entries)) {
-    throw new Error('Audio manifest does not match the current files. Run npm run generate:audio.')
+  const existingById = new Map(existing.entries.map((entry) => [entry.letterId, entry]))
+
+  for (const entry of entries) {
+    const recorded = existingById.get(entry.letterId)
+    const stableFieldsMatch = recorded
+      && recorded.cue === entry.cue
+      && recorded.file === entry.file
+      && recorded.bytes === entry.bytes
+      && recorded.sha256 === entry.sha256
+    const durationIsPortable = recorded
+      && Math.abs(recorded.durationMs - entry.durationMs) <= 120
+
+    if (!stableFieldsMatch || !durationIsPortable) {
+      throw new Error(`Audio manifest does not match ${entry.file}. Run npm run generate:audio.`)
+    }
+  }
+
+  if (existing.entries.length !== entries.length) {
+    throw new Error('Audio manifest entry count does not match the current letter bank.')
   }
 }
 
