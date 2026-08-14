@@ -1,0 +1,59 @@
+{
+  "purpose": "comparison-only",
+  "generatedAt": "2026-08-14T11:08:40Z",
+  "generator": {
+    "service": "ElevenLabs",
+    "voice": "Layla - Modern Arabic",
+    "model": "Eleven Multilingual v2",
+    "language": "Arabic",
+    "speed": 1,
+    "stability": 0.8,
+    "similarity": 0.91,
+    "styleExaggeration": 0,
+    "speakerBoost": true,
+    "output": "MP3 44.1 kHz 128kbps mono"
+  },
+  "processing": "Carrier-phrase generation, onset-preserving trim, two natural-speed takes with original pause, 120ms playback pre-roll, no time stretch and no fade-in",
+  "entries": [
+    {
+      "letterId": "ain",
+      "cue": "عَ",
+      "file": "audio-comparison/ain-clear.mp3",
+      "durationMs": 1275,
+      "bytes": 21359,
+      "sha256": "610fabfbc95433cf61e8941fa5b5d55a12acedd9edca509d5e8541aa49e5d3d0"
+    },
+    {
+      "letterId": "hah",
+      "cue": "حَ",
+      "file": "audio-comparison/hah-clear.mp3",
+      "durationMs": 1256,
+      "bytes": 21359,
+      "sha256": "998d211a45d1204fe6a86811b496e7c477a20c29d7720d89ea292ff548032468"
+    },
+    {
+      "letterId": "dad",
+      "cue": "ضَ",
+      "file": "audio-comparison/dad-clear.mp3",
+      "durationMs": 1322,
+      "bytes": 22195,
+      "sha256": "5dcde59a6b9109eb32b997403396819e17cc19210dab150bbfb1309f8e3bd773"
+    },
+    {
+      "letterId": "qaf",
+      "cue": "قَ",
+      "file": "audio-comparison/qaf-clear.mp3",
+      "durationMs": 1108,
+      "bytes": 18852,
+      "sha256": "a89997a1beb0f2110c187ccd27a3d0950a2a5701ba7976ab39b60fa933597ce8"
+    },
+    {
+      "letterId": "seen",
+      "cue": "سَ",
+      "file": "audio-comparison/seen-clear.mp3",
+      "durationMs": 1353,
+      "bytes": 22613,
+      "sha256": "b00e5725b6fa26764db85bd9905011058ceae19f34d6294bea2bc6924bcfdec6"
+    }
+  ]
+}
