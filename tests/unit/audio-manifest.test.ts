@@ -18,6 +18,8 @@ describe('bundled Arabic audio manifest', () => {
     const ids = manifest.entries.map((entry) => entry.letterId)
 
     expect(manifest.generator).toContain('ElevenLabs Layla')
+    expect(manifest.generator).toContain('speed 1.0')
+    expect(manifest.generator).toContain('two natural-speed takes')
     expect(manifest.entries).toHaveLength(28)
     expect(new Set(ids).size).toBe(28)
 
@@ -41,8 +43,8 @@ describe('bundled Arabic audio manifest', () => {
       expect(stat.size).toBe(entry.bytes)
       expect(stat.size).toBeGreaterThan(0)
       expect(stat.size).toBeLessThanOrEqual(80 * 1024)
-      expect(entry.durationMs).toBeGreaterThanOrEqual(180)
-      expect(entry.durationMs).toBeLessThanOrEqual(1_800)
+      expect(entry.durationMs).toBeGreaterThanOrEqual(1_000)
+      expect(entry.durationMs).toBeLessThanOrEqual(1_600)
       expect(entry.sha256).toBe(hash)
     }
   })

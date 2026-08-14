@@ -190,3 +190,23 @@ preview deliverable only; production activation remains a separate post-approval
 
 All 48 tasks use the required checkbox, sequential ID, optional `[P]`, story label where
 applicable, concrete action, and explicit file path format.
+
+---
+
+## Phase 8: Approved B Audio and Production Hub Release
+
+**Purpose**: Execute the explicit post-approval release without weakening the preview boundary
+or altering unrelated Hub data.
+
+- [x] T049 Record treatment-B and production approval in `spec.md`, `plan.md`, `research.md`, and `quickstart.md`
+- [x] T050 [P] Add failing two-take audio, natural-speed, cache-revision, and production-build tests in `scripts/validate-audio.mjs` and `tests/`
+- [x] T051 Generate and process all 28 approved Layla carrier-phrase cues in `public/audio/*.mp3` and `public/audio/manifest.json`
+- [x] T052 Update the runtime audio revision, quiz semantic version, README, and remove the obsolete A/B-only page in `src/audio/audioPlayer.ts`, `public/quiz-manifest.json`, and `README.md`
+- [x] T053 Make the Pages workflow deploy preview mode from `arabic-phonics-quiz-preview` and production mode from `arabic-phonics-quiz` in `.github/workflows/deploy-preview.yml`
+- [x] T054 [P] Add the reviewed Hub catalog, schema seed, cache bump, and migration in `/Users/macserver/Documents/quizzes-hub/`
+- [x] T055 Run lint, typecheck, unit/property, audio, both builds, and full desktop/mobile browser gates and resolve every failure
+- [x] T056 Obtain an independent Test Automation review of audio, normal Hub, challenge, and production deployment paths
+- [ ] T057 Create and deploy the `arabic-phonics-quiz` production repository and verify the production build, 28 live MP3s, and absent preview marker
+- [ ] T058 Apply the reviewed Supabase migration and verify exactly one quiz row and 78 adaptive profiles without changing unrelated assignments
+- [ ] T059 Assign only the intended child profile(s), deploy the refreshed Hub catalog, and verify the cache-busted live Hub
+- [ ] T060 Complete live normal-launch, adaptive/progress, challenge, and existing-quiz smoke tests and record final evidence

@@ -1,7 +1,7 @@
 export type AudioPlaybackState = 'idle' | 'loading' | 'playing' | 'error'
 
 type AudioStateListener = (state: AudioPlaybackState) => void
-const AUDIO_REVISION = 'layla-hq-2026-08-14'
+const AUDIO_REVISION = 'layla-clear-b1-2026-08-14'
 
 export class AudioPlayer {
   private readonly cache = new Map<string, HTMLAudioElement>()
@@ -64,6 +64,8 @@ export class AudioPlayer {
     source.searchParams.set('v', AUDIO_REVISION)
     const audio = new Audio(source.href)
     audio.preload = 'auto'
+    audio.defaultPlaybackRate = 1
+    audio.playbackRate = 1
     audio.addEventListener('playing', () => {
       if (this.current === audio) this.setState('playing')
     })

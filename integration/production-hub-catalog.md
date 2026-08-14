@@ -1,11 +1,11 @@
-# Deferred Quizzes Hub Integration
+# Approved Quizzes Hub Integration
 
-This file is an approval-gated handoff. None of these production steps are run by the preview
-deployment.
+The user approved treatment B and production publication on 2026-08-14. The preview deployment
+remains isolated while these steps publish the separate production build.
 
 ## Preconditions
 
-1. Obtain explicit approval for the preview and its Arabic audio cues.
+1. Confirm the recorded 2026-08-14 approval for the preview, treatment B, and production release.
 2. Refresh `/Users/macserver/Documents/quizzes-hub` from the real remote `main` and inspect all
    incoming changes before editing; the local checkout observed during development was behind the
    live branch.
@@ -45,6 +45,14 @@ where quiz_id = 'arabic-phonics';
 
 The result must be `78`. Assign the quiz only to explicitly selected child profile IDs in a
 separate, reviewed step after the user chooses those profiles.
+
+## Rollback
+
+- Revert the Hub catalog commit and bump the script query again so cached clients receive the
+  rollback.
+- Before any assignment or recorded activity, deleting the `arabic-phonics` quiz row will cascade
+  to its 78 difficulty profiles. After activity exists, keep the database row and hide only the
+  catalog entry so progress is preserved.
 
 ## Live acceptance
 

@@ -4,13 +4,17 @@
 
 **Created**: 2026-08-14
 
-**Status**: Ready for planning
+**Status**: Approved for production integration on 2026-08-14
 
 **Input**: Create a child-friendly multiple-choice quiz for the existing Quizzes Hub.
 Each question is audio-only and pronounces an Arabic letter as a phonics sound. The child
 chooses the matching letter from four Arabic glyphs. Questions vary between isolated,
 initial, and final joining forms. Deliver a separate online preview for approval, without
 registering, assigning, or publishing the quiz in the production Hub before approval.
+
+**Approval decision**: The user approved audio treatment B: two natural-speed short-fatha
+takes, a brief pause between them, preserved consonant onset, and no time stretching. The user
+also explicitly approved production publication and Unified Hub integration.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -174,6 +178,12 @@ start and finish without a production write.
 - **FR-024**: Pre-approval delivery MUST publish only a clearly labeled separate preview;
   it MUST NOT modify the live Hub catalog, live assignments, live adaptive profiles, or the
   production routes of existing quizzes.
+- **FR-025**: Every approved production cue MUST contain two clearly separated takes of the
+  same short-fatha phonics sound at playback speed `1.0`, preserve the consonant onset, and
+  MUST NOT use time stretching or turn the fatha into a long vowel.
+- **FR-026**: Post-approval publication MUST deploy the `production-hub` build at the stable
+  `/arabic-phonics-quiz/` route, register the stable `arabic-phonics` id and all 78 adaptive
+  profiles in the Hub, and preserve every existing quiz catalog entry and assignment.
 
 ### Key Entities
 
@@ -207,10 +217,13 @@ start and finish without a production write.
   quiz with visible focus and without encountering a focus trap.
 - **SC-007**: Standalone preview startup succeeds within two seconds when every Hub service is
   absent or unresolved, excluding the time required to download the page on a slow network.
-- **SC-008**: Audio files remain individually under 80 KB, begin the useful cue within 150 ms,
-  and have consistent perceived loudness suitable for phone speakers.
+- **SC-008**: Audio files remain individually under 80 KB, begin the first useful cue within
+  260 ms, contain exactly two separated natural-speed takes, and have phone-safe signal level.
 - **SC-009**: Preview verification confirms zero changed files, records, or assignments in the
   production Quizzes Hub and its backend before explicit approval.
+- **SC-010**: After approval, the production quiz URL, all 28 MP3 assets, normal Hub launch,
+  challenge launch, and the updated Hub catalog succeed from the public internet while the
+  preview ribbon remains absent from the production build.
 
 ## Assumptions
 
@@ -221,6 +234,7 @@ start and finish without a production write.
   than comparing incompatible presentation modes.
 - The established Hub convention of 15 questions and easy, medium, and hard assignment
   levels remains current and will be re-verified before production integration.
-- A separate publicly reachable preview is authorized, but live Hub registration, assignment,
-  adaptive seeding, and production release are explicitly outside the pre-approval scope.
+- The separate preview was approved on 2026-08-14. Live Hub registration, adaptive seeding,
+  and production release are now authorized; assignment changes remain limited to the intended
+  child profile(s) and MUST preserve all unrelated assignments.
 - The preview contains no child identity or credential and does not require authentication.

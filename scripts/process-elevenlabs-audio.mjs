@@ -67,85 +67,54 @@ function frameEnvelope(pcm, sampleRate = 44_100, frameMs = 10) {
   return frames
 }
 
-function usefulWindow(filePath) {
+function activeSegments(filePath) {
   const frames = frameEnvelope(decodeMono(filePath))
-  const firstActive = frames.findIndex((frame) => frame.active)
-  const lastActive = frames.findLastIndex((frame) => frame.active)
-
-  if (firstActive < 0 || lastActive <= firstActive) {
-    throw new Error(`No useful speech signal found in ${basename(filePath)}.`)
-  }
-
-  const speechStart = frames[firstActive].start
-  const speechEnd = frames[lastActive].end
-  const internalSilences = []
+  const segments = []
+  let segmentStart = null
+  let lastActiveEnd = null
   let silenceStart = null
 
-  for (let index = firstActive; index <= lastActive; index += 1) {
-    if (!frames[index].active && silenceStart === null) silenceStart = frames[index].start
+  for (const frame of frames) {
+    if (frame.active) {
+      if (segmentStart === null) segmentStart = frame.start
+      lastActiveEnd = frame.end
+      silenceStart = null
+      continue
+    }
 
-    const silenceEnded = frames[index].active && silenceStart !== null
-    const reachedEnd = index === lastActive && silenceStart !== null
+    if (segmentStart === null) continue
+    if (silenceStart === null) silenceStart = frame.start
 
-    if (silenceEnded || reachedEnd) {
-      const silenceEnd = silenceEnded ? frames[index].start : frames[index].end
-      if (silenceEnd - silenceStart >= 0.06) {
-        internalSilences.push({
-          duration: silenceEnd - silenceStart,
-          end: silenceEnd,
-          start: silenceStart,
-        })
-      }
+    if (frame.end - silenceStart >= 0.08) {
+      segments.push({ start: segmentStart, end: lastActiveEnd })
+      segmentStart = null
+      lastActiveEnd = null
       silenceStart = null
     }
   }
 
-  const strongestSeparators = internalSilences
-    .sort((left, right) => right.duration - left.duration)
-    .slice(0, 2)
-    .sort((left, right) => left.start - right.start)
-
-  let start
-  let end
-
-  if (strongestSeparators.length === 2) {
-    start = strongestSeparators[0].end
-    end = strongestSeparators[1].start
-  } else if (strongestSeparators.length === 1) {
-    const separator = strongestSeparators[0]
-    const separatorPosition = ((separator.start + separator.end) / 2 - speechStart) / (speechEnd - speechStart)
-
-    if (separatorPosition >= 0.55) {
-      start = speechStart + (separator.start - speechStart) / 2
-      end = separator.start
-    } else if (separatorPosition <= 0.45) {
-      start = separator.end
-      end = separator.end + (speechEnd - separator.end) / 2
-    }
+  if (segmentStart !== null && lastActiveEnd !== null) {
+    segments.push({ start: segmentStart, end: lastActiveEnd })
   }
 
-  if (start === undefined || end === undefined || end - start < 0.16) {
-    const third = (speechEnd - speechStart) / 3
-    start = speechStart + third
-    end = speechStart + third * 2
+  return segments.filter((segment) => segment.end - segment.start >= 0.1)
+}
+
+function approvedTakes(filePath) {
+  const segments = activeSegments(filePath)
+
+  if (segments.length < 2) {
+    throw new Error(`Expected a carrier phrase followed by two takes in ${basename(filePath)}.`)
   }
 
-  const candidateFrames = frames.filter((frame) => frame.end > start && frame.start < end)
-  const firstCandidateSignal = candidateFrames.find((frame) => frame.active)
-  const lastCandidateSignal = candidateFrames.findLast((frame) => frame.active)
+  const takes = segments.slice(-2)
+  const durations = takes.map((take) => take.end - take.start)
 
-  if (firstCandidateSignal && lastCandidateSignal) {
-    start = Math.max(speechStart, firstCandidateSignal.start - 0.025)
-    end = Math.min(speechEnd, lastCandidateSignal.end + 0.035)
+  if (durations.some((duration) => duration < 0.12 || duration > 0.52)) {
+    throw new Error(`Invalid final take duration in ${basename(filePath)}: ${durations.map((value) => value.toFixed(3)).join(', ')}s.`)
   }
 
-  if (end - start < 0.18) {
-    const center = (start + end) / 2
-    start = Math.max(speechStart, center - 0.09)
-    end = Math.min(speechEnd, center + 0.09)
-  }
-
-  return { end, start }
+  return takes
 }
 
 mkdirSync(outputDirectory, { recursive: true })
@@ -158,16 +127,27 @@ for (const letter of letters) {
     throw new Error(`Missing ElevenLabs source audio: ${inputPath}`)
   }
 
-  const { end, start } = usefulWindow(inputPath)
+  const takes = approvedTakes(inputPath)
+  const [firstTake, secondTake] = takes.map((take) => ({
+    end: take.end + 0.03,
+    start: Math.max(0, take.start - 0.02),
+  }))
+  const filter = [
+    `[0:a]atrim=start=${firstTake.start.toFixed(4)}:end=${firstTake.end.toFixed(4)},asetpts=PTS-STARTPTS[first]`,
+    `[0:a]atrim=start=${secondTake.start.toFixed(4)}:end=${secondTake.end.toFixed(4)},asetpts=PTS-STARTPTS[second]`,
+    'anullsrc=r=44100:cl=mono:d=0.18[lead]',
+    'anullsrc=r=44100:cl=mono:d=0.32[pause]',
+    'anullsrc=r=44100:cl=mono:d=0.15[tail]',
+    '[lead][first][pause][second][tail]concat=n=5:v=0:a=1[out]',
+  ].join(';')
 
   run('ffmpeg', [
     '-hide_banner',
     '-loglevel', 'error',
     '-y',
-    '-ss', start.toFixed(4),
-    '-to', end.toFixed(4),
     '-i', inputPath,
-    '-af', 'afade=t=in:d=0.012,loudnorm=I=-18:LRA=5:TP=-1.5,apad=pad_dur=0.08',
+    '-filter_complex', filter,
+    '-map', '[out]',
     '-ac', '1',
     '-ar', '44100',
     '-codec:a', 'libmp3lame',
@@ -176,5 +156,5 @@ for (const letter of letters) {
     outputPath,
   ])
 
-  console.log(`${letter.id}: ${start.toFixed(3)}s-${end.toFixed(3)}s`)
+  console.log(`${letter.id}: ${firstTake.start.toFixed(3)}s-${firstTake.end.toFixed(3)}s, ${secondTake.start.toFixed(3)}s-${secondTake.end.toFixed(3)}s`)
 }

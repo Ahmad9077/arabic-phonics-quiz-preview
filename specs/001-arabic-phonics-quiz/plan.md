@@ -9,9 +9,10 @@
 Build a standalone RTL React application that teaches the 28 core Arabic letters through
 short-fatha audio cues and four-choice glyph recognition. Keep round generation, joining
 rules, seeded challenge choices, and Hub reporting in testable domain modules. Bundle and
-validate one normalized MP3 per letter. Compile the approval build in an explicit preview
-mode that loads no Hub clients and writes no production data; keep the production Hub bridge
-and integration seed artifacts ready but unapplied until approval.
+validate one normalized MP3 per letter. After the 2026-08-14 approval, replace each cue with
+treatment B (two natural-speed takes with a short pause and preserved onset), retain the
+isolated preview build, deploy the `production-hub` build to its stable repository, and
+activate the already-tested Hub bridge and reviewed seed artifacts.
 
 ## Technical Context
 
@@ -37,8 +38,9 @@ question transition below 150 ms; current and next audio decoded or ready withou
 answer input; active 390 x 844 question screen requires no document scroll
 
 **Constraints**: 15 questions and four options; exact 5/5/5 form balance; 28 audio assets
-under 80 KB each; RTL and keyboard accessibility; no browser speech-synthesis dependency;
-no production Hub files, routes, assignments, or database changes before approval
+under 80 KB each; two natural-speed takes per cue with no time stretching; RTL and keyboard
+accessibility; no browser speech-synthesis dependency; production changes only after explicit
+approval and with unrelated catalog entries and assignments preserved
 
 **Scale/Scope**: 28 letters, 78 valid form variants (28 isolated + 22 initial + 28 final),
 15 attempts per normal round, four user-facing screens, one preview deployment, and one
@@ -146,4 +148,5 @@ challenge behavior, and no-write preview contract testable without introducing a
 
 ## Complexity Tracking
 
-No constitution violations require exceptions.
+No constitution violations require exceptions. The production approval gate was satisfied by
+the user's explicit approval on 2026-08-14; Phase 8 performs the gated release checks.

@@ -4,8 +4,8 @@
 
 - Node.js 26 or a compatible current LTS release
 - npm
-- macOS `say` with the `Majed` voice only when regenerating audio
-- FFmpeg and FFprobe only when regenerating or deeply validating audio
+- ElevenLabs Layla exports only when regenerating audio
+- FFmpeg and FFprobe when regenerating or deeply validating audio
 
 No Supabase credentials, Hub login, or production repository access is required for preview.
 
@@ -27,7 +27,7 @@ npm run validate:audio
 ```
 
 Expected outcome: 28 MP3 files and a manifest with unique ids, matching cues, bounded sizes,
-durations, hashes, and no leading-silence violation.
+durations, hashes, two separated natural-speed takes, and preserved onset pre-roll.
 
 ## Run automated quality gates
 
@@ -57,8 +57,9 @@ npm run preview:dist -- --host 127.0.0.1
 Open the printed URL after `npm run build:preview`. Verify Arabic fonts and all audio work with
 the network disabled after the first load.
 
-## Deferred production validation
+## Approved production validation
 
-Do not run a production-Hub deployment before approval. The future release checklist is in
-`contracts/hub-contract.md` and requires a refreshed Hub checkout, reviewed migration, live
-challenge check, assignment confirmation, and cache-buster verification.
+Build `production-hub`, deploy it to `https://ahmad9077.github.io/arabic-phonics-quiz/`, then
+apply the reviewed Hub migration, add the catalog entry with a cache-buster bump, and verify
+normal launch, adaptive reporting, challenge mode, 78 profiles, and the intended assignment.
+The release checklist and stable contracts remain in `contracts/hub-contract.md`.

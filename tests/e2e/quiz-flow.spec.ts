@@ -16,7 +16,7 @@ test('starts with audio, replays it, and locks only the first answer', async ({ 
   const answers = page.getByTestId('answer-option')
   await expect(answers).toHaveCount(4)
   await expect.poll(() => audioRequests.length).toBeGreaterThan(0)
-  expect(new URL(audioRequests[0]).searchParams.get('v')).toBe('layla-hq-2026-08-14')
+  expect(new URL(audioRequests[0]).searchParams.get('v')).toBe('layla-clear-b1-2026-08-14')
 
   const beforeReplay = audioRequests.length
   await page.getByRole('button', { name: 'اسمعي الصوت مرة أخرى' }).click()

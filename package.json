@@ -1,6 +1,6 @@
 {
-  "name": "arabic-phonics-quiz-preview",
-  "version": "0.1.0",
+  "name": "arabic-phonics-quiz",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -16,11 +16,10 @@
     "test:e2e": "playwright test",
     "generate:audio": "bash scripts/generate-audio.sh",
     "validate:audio": "node scripts/validate-audio.mjs",
-    "validate:audio-comparison": "node scripts/validate-audio-comparison.mjs",
     "validate:manifest": "node scripts/validate-manifest.mjs",
     "generate:hub-seed": "node scripts/generate-hub-seed.mjs",
     "validate:hub-seed": "node scripts/generate-hub-seed.mjs --check",
-    "check": "npm run lint && npm run typecheck && npm test && npm run validate:audio && npm run validate:audio-comparison && npm run validate:manifest && npm run validate:hub-seed && npm run build:preview"
+    "check": "npm run lint && npm run typecheck && npm test && npm run validate:audio && npm run validate:manifest && npm run validate:hub-seed && npm run build:preview"
   },
   "dependencies": {
     "@fontsource-variable/noto-kufi-arabic": "^5.3.0",

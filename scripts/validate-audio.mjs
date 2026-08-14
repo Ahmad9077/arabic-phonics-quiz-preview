@@ -4,7 +4,7 @@ import { resolve } from 'node:path'
 import { spawnSync } from 'node:child_process'
 
 const projectRoot = resolve(import.meta.dirname, '..')
-const audioDirectory = resolve(projectRoot, 'public/audio')
+const audioDirectory = resolve(process.env.ARABIC_AUDIO_DIR ?? resolve(projectRoot, 'public/audio'))
 const manifestPath = resolve(audioDirectory, 'manifest.json')
 const letters = JSON.parse(readFileSync(resolve(projectRoot, 'src/data/letters.json'), 'utf8'))
 const shouldWrite = process.argv.includes('--write')
@@ -51,23 +51,63 @@ function signalMetrics(filePath) {
   const pcm = run('ffmpeg', ['-v', 'error', '-i', filePath, '-ac', '1', '-ar', '44100', '-f', 'f32le', 'pipe:1'])
   const buffer = Buffer.isBuffer(pcm) ? pcm : Buffer.from(pcm)
   const sampleCount = Math.floor(buffer.length / 4)
-  let onsetMs = Number.POSITIVE_INFINITY
+  const samplesPerFrame = 441
+  const frames = []
   let peakAmplitude = 0
 
-  for (let index = 0; index < sampleCount; index += 1) {
-    const amplitude = Math.abs(buffer.readFloatLE(index * 4))
-    peakAmplitude = Math.max(peakAmplitude, amplitude)
-    if (!Number.isFinite(onsetMs) && amplitude >= 0.003) {
-      onsetMs = Math.round((index / 44_100) * 1_000)
+  for (let start = 0; start < sampleCount; start += samplesPerFrame) {
+    const end = Math.min(sampleCount, start + samplesPerFrame)
+    let sumSquares = 0
+    let framePeak = 0
+
+    for (let index = start; index < end; index += 1) {
+      const sample = buffer.readFloatLE(index * 4)
+      sumSquares += sample * sample
+      framePeak = Math.max(framePeak, Math.abs(sample))
+    }
+
+    peakAmplitude = Math.max(peakAmplitude, framePeak)
+    frames.push({
+      active: Math.sqrt(sumSquares / Math.max(1, end - start)) >= 0.0015 || framePeak >= 0.006,
+      end: end / 44_100,
+      start: start / 44_100,
+    })
+  }
+
+  const segments = []
+  let segmentStart = null
+  let lastActiveEnd = null
+  let silenceStart = null
+
+  for (const frame of frames) {
+    if (frame.active) {
+      if (segmentStart === null) segmentStart = frame.start
+      lastActiveEnd = frame.end
+      silenceStart = null
+      continue
+    }
+
+    if (segmentStart === null) continue
+    if (silenceStart === null) silenceStart = frame.start
+
+    if (frame.end - silenceStart >= 0.08) {
+      segments.push({ start: segmentStart, end: lastActiveEnd })
+      segmentStart = null
+      lastActiveEnd = null
+      silenceStart = null
     }
   }
 
-  return { onsetMs, peakAmplitude }
+  if (segmentStart !== null && lastActiveEnd !== null) {
+    segments.push({ start: segmentStart, end: lastActiveEnd })
+  }
+
+  return { peakAmplitude, segments }
 }
 
 const entries = letters.map((letter) => {
   const file = `audio/${letter.id}.mp3`
-  const filePath = resolve(projectRoot, 'public', file)
+  const filePath = resolve(audioDirectory, `${letter.id}.mp3`)
 
   if (!existsSync(filePath)) {
     throw new Error(`Missing audio asset: ${file}`)
@@ -79,13 +119,13 @@ const entries = letters.map((letter) => {
   const properties = audioProperties(filePath)
   const stream = properties.streams?.[0]
   const bitRate = Number.parseInt(properties.format?.bit_rate ?? '0', 10)
-  const { onsetMs, peakAmplitude } = signalMetrics(filePath)
+  const { peakAmplitude, segments } = signalMetrics(filePath)
 
   if (size <= 0 || size > 80 * 1024) {
     throw new Error(`${file} has invalid size ${size}.`)
   }
 
-  if (duration < 180 || duration > 1_800) {
+  if (duration < 1_000 || duration > 1_600) {
     throw new Error(`${file} has invalid duration ${duration}ms.`)
   }
 
@@ -97,11 +137,27 @@ const entries = letters.map((letter) => {
     throw new Error(`${file} has insufficient bitrate ${bitRate}.`)
   }
 
-  if (onsetMs > 150) {
-    throw new Error(`${file} begins useful signal at ${onsetMs}ms.`)
+  if (segments.length !== 2) {
+    throw new Error(`${file} must contain exactly two separated natural-speed takes.`)
   }
 
-  if (peakAmplitude < 0.1) {
+  const onsetMs = Math.round(segments[0].start * 1_000)
+  const pauseMs = Math.round((segments[1].start - segments[0].end) * 1_000)
+  const takeDurationsMs = segments.map((segment) => Math.round((segment.end - segment.start) * 1_000))
+
+  if (onsetMs < 140 || onsetMs > 260) {
+    throw new Error(`${file} begins useful signal at ${onsetMs}ms; expected a 140-260ms pre-roll.`)
+  }
+
+  if (pauseMs < 180 || pauseMs > 550) {
+    throw new Error(`${file} has an invalid inter-take pause of ${pauseMs}ms.`)
+  }
+
+  if (takeDurationsMs.some((takeDuration) => takeDuration < 120 || takeDuration > 520)) {
+    throw new Error(`${file} has an invalid natural-take duration: ${takeDurationsMs.join(', ')}ms.`)
+  }
+
+  if (peakAmplitude < 0.1 || peakAmplitude >= 0.98) {
     throw new Error(`${file} is silent or too quiet (peak ${peakAmplitude}).`)
   }
 
@@ -117,7 +173,7 @@ const entries = letters.map((letter) => {
 
 const manifest = {
   generatedAt: new Date().toISOString(),
-  generator: 'ElevenLabs Layla (Multilingual v2, Arabic) + FFmpeg middle-take loudnorm',
+  generator: 'ElevenLabs Layla (Multilingual v2, Arabic, speed 1.0) + FFmpeg onset-preserving two natural-speed takes, no time stretch',
   entries,
 }
 
@@ -125,6 +181,9 @@ if (shouldWrite) {
   writeFileSync(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`)
 } else {
   const existing = JSON.parse(readFileSync(manifestPath, 'utf8'))
+  if (!existing.generator.includes('two natural-speed takes') || !existing.generator.includes('speed 1.0')) {
+    throw new Error('Audio manifest must identify the approved natural-speed two-take treatment B.')
+  }
   const existingById = new Map(existing.entries.map((entry) => [entry.letterId, entry]))
 
   for (const entry of entries) {

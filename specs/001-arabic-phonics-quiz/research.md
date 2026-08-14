@@ -41,18 +41,21 @@ keeps the phonics pattern consistent and distinct from formal letter-name recall
 
 ## Decision 3: Bundle generated audio rather than use browser speech
 
-**Decision**: Generate 28 source cues with the installed macOS Arabic voice `Majed`, then use
-FFmpeg to trim leading/trailing silence, apply a short fade, normalize loudness, convert to
-mono MP3, and validate size/duration/signal onset. Commit the resulting files and manifest.
+**Decision**: Generate each short-fatha cue with ElevenLabs `Layla - Modern Arabic` using
+Multilingual v2, Arabic override, speed `1.0`, stability `0.8`, similarity `0.91`, style `0`,
+and speaker boost. Generate inside a carrier phrase, use FFmpeg to retain the final two takes,
+preserve a short pre-roll and the consonant attack, remove the carrier phrase, and export mono
+44.1 kHz/128 kbps MP3 without time stretching or fade-in.
 
-**Rationale**: The configured HeyGen TTS skill requires `HEYGEN_API_KEY`, which is not present.
-The installed Arabic system voice provides deterministic local generation without adding a
-credential or a runtime network dependency. Bundled audio avoids device-to-device voice drift.
+**Rationale**: The original single-take clips were too short for reliable recognition even by
+an adult listener. Carrier-phrase generation improves the onset, and two unmodified takes give
+the learner a second perception opportunity without slowing the phoneme or lengthening fatha.
+The user auditioned عَ، حَ، ضَ، قَ، and سَ in an A/B page and explicitly approved B.
 
 **Alternatives considered**:
 
-- HeyGen Starfish: unavailable without the required credential; no authentication action is
-  authorized for this task.
+- One tightly cropped Layla take: rejected after audition because onset brevity reduced clarity.
+- Time-stretched audio: rejected because it distorts articulation and can imply a long vowel.
 - Web Speech API: rejected because Arabic voice availability and pronunciation vary by device.
 - Runtime audio API: rejected because it adds cost, latency, credentials, and child-facing
   failure modes.
@@ -99,14 +102,13 @@ statically replaced at build time, giving the deployment a reviewable separation
 
 ## Decision 6: Deploy a separate GitHub Pages preview repository
 
-**Decision**: Publish the approved build artifact to a new public repository named
-`arabic-phonics-quiz-preview` using the official Pages artifact workflow. The page and
-repository stay clearly labeled Preview. Do not edit `quizzes-hub`, Supabase, or existing quiz
-repositories.
+**Decision**: Keep `arabic-phonics-quiz-preview` as the isolated approval surface. After
+approval, publish the same reviewed source to a separate public production repository named
+`arabic-phonics-quiz`, build it with Vite mode `production-hub`, and register its stable URL in
+`quizzes-hub` and Supabase while preserving existing quizzes.
 
-**Rationale**: GitHub authentication is already available and the existing family of quizzes
-uses project Pages. A separate repository creates the requested internet link without changing
-production routing or assignments.
+**Rationale**: Separate repositories preserve the no-write preview contract while giving the
+Hub build the stable base path and verified client-loading behavior required in production.
 
 **Alternatives considered**:
 
