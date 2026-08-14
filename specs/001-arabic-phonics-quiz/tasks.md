@@ -188,7 +188,7 @@ preview deliverable only; production activation remains a separate post-approval
 
 ## Format Validation
 
-All 48 tasks use the required checkbox, sequential ID, optional `[P]`, story label where
+All 60 tasks use the required checkbox, sequential ID, optional `[P]`, story label where
 applicable, concrete action, and explicit file path format.
 
 ---
@@ -206,7 +206,13 @@ or altering unrelated Hub data.
 - [x] T054 [P] Add the reviewed Hub catalog, schema seed, cache bump, and migration in `/Users/macserver/Documents/quizzes-hub/`
 - [x] T055 Run lint, typecheck, unit/property, audio, both builds, and full desktop/mobile browser gates and resolve every failure
 - [x] T056 Obtain an independent Test Automation review of audio, normal Hub, challenge, and production deployment paths
-- [ ] T057 Create and deploy the `arabic-phonics-quiz` production repository and verify the production build, 28 live MP3s, and absent preview marker
-- [ ] T058 Apply the reviewed Supabase migration and verify exactly one quiz row and 78 adaptive profiles without changing unrelated assignments
-- [ ] T059 Assign only the intended child profile(s), deploy the refreshed Hub catalog, and verify the cache-busted live Hub
-- [ ] T060 Complete live normal-launch, adaptive/progress, challenge, and existing-quiz smoke tests and record final evidence
+- [x] T057 Create and deploy the `arabic-phonics-quiz` production repository and verify the production build, 28 live MP3s, and absent runtime preview marker
+- [x] T058 Apply the reviewed Supabase migration and verify exactly one quiz row and 78 adaptive profiles without changing unrelated assignments
+- [x] T059 Preserve existing child assignments for administrator selection, deploy the refreshed Hub catalog, and verify the cache-busted live Hub
+- [x] T060 Complete production-mode normal-launch, adaptive/progress, challenge, live access-guard, audio, and existing-quiz smoke tests and record final evidence
+
+**Release evidence (2026-08-14)**: Supabase returned `1` quiz row, `78` adaptive
+profiles, and `0` automatic assignments. Hub Pages deployed commit `d4d3d45` with
+`script.js?v=23`; all seven catalog URLs returned HTTP 200. Production commit `971b31e`
+served all 28 approved MP3s with matching SHA-256 hashes. The final gate passed 17 unit/
+contract tests and 20 desktop/mobile Playwright tests.
